@@ -12,7 +12,6 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.material3.Icon
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -23,6 +22,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.wear.compose.material.Text
 import com.eveliina.scaffoldapp.ui.theme.ScaffoldAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -36,8 +36,8 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-//@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScaffoldApp() {
     val navController = rememberNavController()
@@ -56,29 +56,25 @@ fun ScaffoldApp() {
             SettingsScreen(navController)
         }
     }
-}
-/*
-    Scaffold(
-        topBar = { TopAppBar { Text(text="My app") }},
-        content = { Text(text="Content for home screen") },
-        //bottomBar = { BottomAppBar { Text(text="Bottom bar")}}
-)
-*/
 
+ /*   Scaffold(
+        topBar = { TopAppBar { Text(text = "My app") } },
+        content = { Text(text = "Content for home screen") },
+        //bottomBar = { BottomAppBar { Text(text="Bottom bar")}}
+    )
+*/
+}
 // TOP & SCREEN BARS
 //
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainTopBar(title: String,navController: NavController) {
+fun MainTopBar(title: String, navController: NavController) {
     var expanded by remember { mutableStateOf(false)}
-
     TopAppBar(
         title = { Text(title)},
         actions = {
             IconButton(
-                onClick = {
-                    expanded = !expanded
-                }
+                onClick = { expanded = !expanded }
             ) {
                 Icon(Icons.Filled.MoreVert, contentDescription = null)
             }
@@ -88,13 +84,15 @@ fun MainTopBar(title: String,navController: NavController) {
                 DropdownMenuItem(onClick = { navController.navigate("info") }) {
                     Text("Info")
                 }
-                DropdownMenuItem(onClick = { navController.settings("settings") }) {
+                DropdownMenuItem(onClick = { navController.navigate("settings") }) {
                     Text("Settings")
                 }
             }
         }
     )
 }
+
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
